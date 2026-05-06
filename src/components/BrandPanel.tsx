@@ -41,6 +41,30 @@ const BRAND_STYLES: Record<string, { gradient: string; badge: string }> = {
     gradient: "from-green-500 via-emerald-500 to-teal-500",
     badge: "bg-green-100 text-green-700",
   },
+  "雅迪 Yadea": {
+    gradient: "from-red-500 via-rose-500 to-pink-600",
+    badge: "bg-red-100 text-red-700",
+  },
+  "爱玛 AIMA": {
+    gradient: "from-pink-400 via-rose-400 to-red-400",
+    badge: "bg-pink-100 text-pink-700",
+  },
+  "台铃 TAILG": {
+    gradient: "from-cyan-500 via-sky-500 to-blue-500",
+    badge: "bg-cyan-100 text-cyan-700",
+  },
+  "绿源 LUYUAN": {
+    gradient: "from-lime-500 via-green-500 to-emerald-500",
+    badge: "bg-lime-100 text-lime-700",
+  },
+  "新日 SUNRA": {
+    gradient: "from-amber-400 via-orange-400 to-yellow-500",
+    badge: "bg-amber-100 text-amber-700",
+  },
+  "五星钻豹": {
+    gradient: "from-yellow-500 via-amber-500 to-orange-500",
+    badge: "bg-yellow-100 text-yellow-700",
+  },
 };
 
 const defaultStyle = {
