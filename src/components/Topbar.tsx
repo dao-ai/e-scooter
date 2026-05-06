@@ -13,6 +13,7 @@ const breadcrumbLabels: Record<string, string> = {
   "/overview": "总览",
   "/models": "车型库",
   "/brands": "品牌大全",
+  "/delivery": "外卖车",
   "/news": "资讯流",
   "/charging": "补能网络",
 };
