@@ -15,3 +15,7 @@
 ## 后续接入
 
 当前数据位于 `app.js` 的数组中，可替换为真实 API、CMS、爬虫结果或静态 JSON 数据源。
+
+## 部署
+
+推送到 `main` 后，GitHub Actions 会自动把静态站点发布到 `gh-pages` 分支。
