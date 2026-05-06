@@ -1,12 +1,13 @@
 "use client";
 
-import { type FC } from "react";
+import { useEffect, type FC } from "react";
 import type { Model } from "@/lib/types";
 import { useAppContext } from "@/lib/app-context";
 import BrandPanel from "@/components/BrandPanel";
 
 export const BrandsClient: FC<{ models: Model[] }> = ({ models }) => {
-  const { state, toggleCompare } = useAppContext();
+  const { setModels, state, toggleCompare } = useAppContext();
+  useEffect(() => { setModels(models); }, [models, setModels]);
 
   return (
     <div className="mt-4">

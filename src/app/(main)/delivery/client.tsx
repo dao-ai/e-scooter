@@ -1,12 +1,14 @@
 "use client";
 
-import { type FC, useMemo } from "react";
+import { useEffect, useMemo, type FC } from "react";
 import type { Model } from "@/lib/types";
 import { useAppContext } from "@/lib/app-context";
 import ModelCard from "@/components/ModelCard";
 
 export const DeliveryClient: FC<{ models: Model[] }> = ({ models }) => {
-  const { state, toggleCompare } = useAppContext();
+  const { setModels, state, toggleCompare } = useAppContext();
+  useEffect(() => { setModels(models); }, [models, setModels]);
+
   const deliveryModels = useMemo(() => models.filter((m) => m.use === "delivery"), [models]);
 
   return (

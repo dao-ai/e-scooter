@@ -1,9 +1,11 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback, type FC, type ReactNode } from "react";
-import type { FilterState } from "@/lib/types";
+import type { Model, FilterState } from "@/lib/types";
 
 interface AppContextValue {
+  models: Model[];
+  setModels: (models: Model[]) => void;
   state: FilterState;
   patchState: (patch: Partial<FilterState>) => void;
   toggleCompare: (id: string) => void;
@@ -18,6 +20,7 @@ export function useAppContext() {
 }
 
 export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [models, setModels] = useState<Model[]>([]);
   const [state, setState] = useState<FilterState>({
     use: "all",
     price: "all",
@@ -44,7 +47,7 @@ export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ state, patchState, toggleCompare }}>
+    <AppContext.Provider value={{ models, setModels, state, patchState, toggleCompare }}>
       {children}
     </AppContext.Provider>
   );
