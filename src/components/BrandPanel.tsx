@@ -12,29 +12,39 @@ interface BrandPanelProps {
   onViewModel: () => void;
 }
 
-const BRAND_ORDERS: Record<string, number> = {
-  "极核 ZEEHO": 0,
-  "巨龙": 1,
-  "星驰": 2,
-  "凌越": 3,
-  "路勤": 4,
-  "小境": 5,
-  "锐能": 6,
-  "即达": 7,
+const BRAND_STYLES: Record<string, { gradient: string; badge: string }> = {
+  "极核 ZEEHO": {
+    gradient: "from-violet-500 via-purple-600 to-indigo-700",
+    badge: "bg-violet-100 text-violet-700",
+  },
+  "巨龙": {
+    gradient: "from-orange-500 via-red-500 to-rose-600",
+    badge: "bg-orange-100 text-orange-700",
+  },
+  "小牛 NIU": {
+    gradient: "from-blue-500 via-cyan-500 to-teal-500",
+    badge: "bg-blue-100 text-blue-700",
+  },
+  "九号 Ninebot": {
+    gradient: "from-emerald-500 via-green-500 to-teal-600",
+    badge: "bg-emerald-100 text-emerald-700",
+  },
+  "赛鸽": {
+    gradient: "from-amber-500 via-yellow-500 to-orange-500",
+    badge: "bg-amber-100 text-amber-700",
+  },
+  "小刀": {
+    gradient: "from-sky-500 via-blue-500 to-indigo-600",
+    badge: "bg-sky-100 text-sky-700",
+  },
 };
 
-const BRAND_COLORS: Record<string, string> = {
-  "极核 ZEEHO": "from-blue-600 to-indigo-700",
-  "巨龙": "from-red-600 to-orange-700",
-  "星驰": "from-teal-500 to-cyan-600",
-  "凌越": "from-purple-500 to-violet-600",
-  "路勤": "from-amber-500 to-yellow-600",
-  "小境": "from-green-500 to-emerald-600",
-  "锐能": "from-rose-500 to-pink-600",
-  "即达": "from-sky-500 to-blue-600",
+const defaultStyle = {
+  gradient: "from-gray-500 to-gray-600",
+  badge: "bg-gray-100 text-gray-700",
 };
 
-const BrandPanel: FC<BrandPanelProps> = ({ models, compare, onToggleCompare, onViewModel }) => {
+const BrandPanel: FC<BrandPanelProps> = ({ models, compare, onToggleCompare }) => {
   const brandMap = useMemo(() => {
     const map = new Map<string, Model[]>();
     for (const m of models) {
@@ -42,9 +52,7 @@ const BrandPanel: FC<BrandPanelProps> = ({ models, compare, onToggleCompare, onV
       list.push(m);
       map.set(m.brand, list);
     }
-    return [...map.entries()].sort(
-      (a, b) => (BRAND_ORDERS[a[0]] ?? 99) - (BRAND_ORDERS[b[0]] ?? 99)
-    );
+    return [...map.entries()].sort((a, b) => b[1].length - a[1].length);
   }, [models]);
 
   return (
@@ -57,13 +65,13 @@ const BrandPanel: FC<BrandPanelProps> = ({ models, compare, onToggleCompare, onV
           brandModels.reduce((s, m) => s + m.range, 0) / brandModels.length
         );
         const bestScore = Math.max(...brandModels.map((m) => m.score));
-        const gradient = BRAND_COLORS[brand] ?? "from-gray-500 to-gray-600";
+        const style = BRAND_STYLES[brand] ?? defaultStyle;
 
         return (
           <section key={brand}>
             {/* 品牌头 */}
             <div
-              className={`bg-gradient-to-r ${gradient} rounded-xl p-6 text-white mb-4 flex items-center justify-between flex-wrap gap-4`}
+              className={`bg-gradient-to-r ${style.gradient} rounded-xl p-6 text-white mb-4 flex items-center justify-between flex-wrap gap-4 shadow-sm`}
             >
               <div>
                 <h2 className="text-2xl font-bold m-0">{brand}</h2>
@@ -71,7 +79,7 @@ const BrandPanel: FC<BrandPanelProps> = ({ models, compare, onToggleCompare, onV
                   {brandModels.length} 款车型 · 均价 {formatPrice(avgPrice)} · 平均续航 {avgRange}km
                 </p>
               </div>
-              <div className="flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-5 text-sm">
                 <div className="text-center">
                   <div className="text-2xl font-bold">{brandModels.length}</div>
                   <div className="text-white/70 text-xs">车型</div>
