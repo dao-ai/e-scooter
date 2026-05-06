@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "电摩情报站",
   description: "电动摩托车信息聚合看板",
   icons: {
-    icon: { url: "/favicon.svg", type: "image/svg+xml" },
+    icon: "/favicon.svg?v=2",
   },
 };
 
