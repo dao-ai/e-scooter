@@ -37,6 +37,10 @@ const BRAND_STYLES: Record<string, { gradient: string; badge: string }> = {
     gradient: "from-sky-500 via-blue-500 to-indigo-600",
     badge: "bg-sky-100 text-sky-700",
   },
+  "绿佳": {
+    gradient: "from-green-500 via-emerald-500 to-teal-500",
+    badge: "bg-green-100 text-green-700",
+  },
 };
 
 const defaultStyle = {
