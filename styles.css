@@ -524,6 +524,25 @@ h2 {
   font-weight: 700;
 }
 
+.source-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.source-row a {
+  color: var(--blue);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.source-row a:hover {
+  text-decoration: underline;
+}
+
 .card-actions {
   display: flex;
   justify-content: space-between;

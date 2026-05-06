@@ -88,6 +88,102 @@ const models = [
     score: 81,
     heat: 64,
     tags: ["后货架", "耐磨胎", "可拆电池"]
+  },
+  {
+    id: "m7",
+    name: "黑骑士 D2S 换电版",
+    brand: "赛鸽黑骑士",
+    use: "delivery",
+    price: 3499,
+    range: null,
+    topSpeed: null,
+    battery: "换电版 / 电池待核",
+    charge: "换电",
+    source: "ZOL 京东报价",
+    sourceUrl: "https://ebike.zol.com.cn/1112/11129045.html",
+    score: 78,
+    heat: 72,
+    tags: ["外卖车", "铁塔小哈换电", "智能仪表"]
+  },
+  {
+    id: "m8",
+    name: "黑骑士 D3 换电版",
+    brand: "赛鸽黑骑士",
+    use: "delivery",
+    price: 4199,
+    range: null,
+    topSpeed: null,
+    battery: "72V 20Ah 铅酸",
+    charge: "换电",
+    source: "ZOL 京东报价",
+    sourceUrl: "https://ebike.zol.com.cn/1112/11129483.html",
+    score: 82,
+    heat: 76,
+    tags: ["骑手外卖", "小哈换电", "原价 4599"]
+  },
+  {
+    id: "m9",
+    name: "黑骑士 E10",
+    brand: "赛鸽黑骑士",
+    use: "delivery",
+    price: 4386,
+    range: null,
+    topSpeed: null,
+    battery: "48V/60V/72V 通用空车",
+    charge: "换电/快充",
+    source: "ZOL / 快懂百科",
+    sourceUrl: "https://ebike.zol.com.cn/937/9370520.html",
+    score: 84,
+    heat: 81,
+    tags: ["外卖场景", "高碳钢车架", "强光大灯"]
+  },
+  {
+    id: "m10",
+    name: "黑骑士 B3L 换电版",
+    brand: "赛鸽黑骑士",
+    use: "delivery",
+    price: 3599,
+    range: null,
+    topSpeed: null,
+    battery: "空车 / 不含电池充电器",
+    charge: "换电",
+    source: "什么值得买商品库",
+    sourceUrl: "https://wiki.smzdm.com/diandongche/b_237521/",
+    score: 79,
+    heat: 70,
+    tags: ["外卖车", "裸车车架", "高端换电"]
+  },
+  {
+    id: "m11",
+    name: "黑骑士 E10R 换电版",
+    brand: "赛鸽黑骑士",
+    use: "delivery",
+    price: 2999,
+    range: null,
+    topSpeed: null,
+    battery: "空车 / 不含电池充电器",
+    charge: "换电",
+    source: "什么值得买商品库",
+    sourceUrl: "https://wiki.smzdm.com/diandongche/b_237521/",
+    score: 80,
+    heat: 74,
+    tags: ["外卖车", "星钻黑", "空车配置"]
+  },
+  {
+    id: "m12",
+    name: "黑骑士 B3R 换电版",
+    brand: "赛鸽黑骑士",
+    use: "delivery",
+    price: 3599,
+    range: null,
+    topSpeed: null,
+    battery: "空车 / 不含电池充电器",
+    charge: "换电",
+    source: "什么值得买商品库",
+    sourceUrl: "https://wiki.smzdm.com/diandongche/b_237521/",
+    score: 79,
+    heat: 68,
+    tags: ["外卖车", "专业换电", "星钻黑"]
   }
 ];
 
@@ -176,9 +272,9 @@ function filteredModels() {
   return models.filter((model) => {
     const matchesUse = state.use === "all" || model.use === state.use;
     const matchesPrice = state.price === "all" || priceBand(model.price) === state.price;
-    const matchesRange = model.range >= state.minRange;
+    const matchesRange = model.range == null || model.range >= state.minRange;
     const matchesCharging = !state.chargingOnly || model.charge !== "慢充";
-    const matchesQuery = !query || [model.name, model.brand, model.charge, model.tags.join(" ")]
+    const matchesQuery = !query || [model.name, model.brand, model.charge, model.source, model.tags.join(" ")]
       .join(" ")
       .toLowerCase()
       .includes(query);
@@ -187,7 +283,8 @@ function filteredModels() {
 }
 
 function renderMetrics() {
-  const avgRange = Math.round(models.reduce((sum, model) => sum + model.range, 0) / models.length);
+  const rangeModels = models.filter((model) => model.range != null);
+  const avgRange = Math.round(rangeModels.reduce((sum, model) => sum + model.range, 0) / rangeModels.length);
   const fastShare = Math.round(models.filter((model) => model.charge !== "慢充").length / models.length * 100);
   $("#metricModels").textContent = models.length;
   $("#metricAvgRange").textContent = avgRange;
@@ -199,6 +296,8 @@ function renderModels() {
   resultCount.textContent = `${visibleModels.length} 款`;
   grid.innerHTML = visibleModels.map((model) => {
     const selected = state.compare.includes(model.id);
+    const rangeText = model.range == null ? "待核" : `${model.range} km`;
+    const topSpeedText = model.topSpeed == null ? "待核" : `${model.topSpeed} km/h`;
     return `
       <article class="model-card">
         <div class="model-top">
@@ -210,11 +309,15 @@ function renderModels() {
         </div>
         <div class="spec-grid">
           <div class="spec"><b>¥${model.price.toLocaleString("zh-CN")}</b><span>参考价</span></div>
-          <div class="spec"><b>${model.range} km</b><span>续航</span></div>
-          <div class="spec"><b>${model.topSpeed} km/h</b><span>极速</span></div>
+          <div class="spec"><b>${rangeText}</b><span>续航</span></div>
+          <div class="spec"><b>${topSpeedText}</b><span>极速</span></div>
         </div>
         <div class="tag-row">
           ${model.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+        </div>
+        <div class="source-row">
+          <span>${model.source}</span>
+          ${model.sourceUrl ? `<a href="${model.sourceUrl}" target="_blank" rel="noreferrer">来源</a>` : ""}
         </div>
         <div class="card-actions">
           <span class="source">${model.battery} · ${model.charge}</span>
@@ -240,19 +343,25 @@ function renderCompare() {
     return;
   }
 
-  compareList.innerHTML = selectedModels.map((model) => `
-    <div class="compare-item">
-      <header>
-        <b>${model.name}</b>
-        <button class="ghost-button" type="button" data-remove="${model.id}">移除</button>
-      </header>
-      <div class="spec-grid">
-        <div class="spec"><b>${model.range}</b><span>km</span></div>
-        <div class="spec"><b>${model.topSpeed}</b><span>km/h</span></div>
-        <div class="spec"><b>${model.score}</b><span>评分</span></div>
+  compareList.innerHTML = selectedModels.map((model) => {
+    const rangeText = model.range == null ? "待核" : model.range;
+    const rangeUnit = model.range == null ? "续航" : "km";
+    const topSpeedText = model.topSpeed == null ? "待核" : model.topSpeed;
+    const topSpeedUnit = model.topSpeed == null ? "极速" : "km/h";
+    return `
+      <div class="compare-item">
+        <header>
+          <b>${model.name}</b>
+          <button class="ghost-button" type="button" data-remove="${model.id}">移除</button>
+        </header>
+        <div class="spec-grid">
+          <div class="spec"><b>${rangeText}</b><span>${rangeUnit}</span></div>
+          <div class="spec"><b>${topSpeedText}</b><span>${topSpeedUnit}</span></div>
+          <div class="spec"><b>${model.score}</b><span>评分</span></div>
+        </div>
       </div>
-    </div>
-  `).join("");
+    `;
+  }).join("");
 }
 
 function renderTrends() {
