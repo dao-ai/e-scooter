@@ -26,7 +26,7 @@ export const DeliveryClient: FC<{ models: Model[] }> = ({ models }) => {
           暂无外卖车型数据
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3 max-md:grid-cols-1">
+        <div className="grid grid-cols-3 gap-3 max-lg:grid-cols-2 max-md:grid-cols-1">
           {deliveryModels.map((model) => (
             <ModelCard
               key={model.id}

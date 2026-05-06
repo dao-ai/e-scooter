@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type FC } from "react";
-import type { Model, NewsItem, CityCharge, FilterState } from "@/lib/types";
+import type { Model, NewsItem, CityCharge } from "@/lib/types";
 import { useAppContext } from "@/lib/app-context";
 import Overview from "@/components/Overview";
 import Filters from "@/components/Filters";
@@ -24,13 +24,8 @@ export const OverviewClient: FC<Props> = ({ models, newsItems, cities }) => {
     <>
       <Overview models={models} />
       <Filters state={state} onChange={patchState} />
-      <div className="grid grid-cols-[1fr_356px] gap-4 mt-4 max-lg:grid-cols-1">
+      <div className="mt-4">
         <ModelGrid models={models} state={state} onToggleCompare={toggleCompare} />
-        <aside className="grid content-start gap-4">
-          <div className="hidden">
-            <div id="compare-anchor" />
-          </div>
-        </aside>
       </div>
       <NewsSection
         newsItems={newsItems}

@@ -66,7 +66,7 @@ const BrandPanel: FC<BrandPanelProps> = ({ models, compare, onToggleCompare }) =
                 <div className="text-center"><div className="text-2xl font-bold">{avgRange}</div><div className="text-white/70 text-xs">均续航 km</div></div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 max-md:grid-cols-1">
+            <div className="grid grid-cols-3 gap-3 max-lg:grid-cols-2 max-md:grid-cols-1">
               {brandModels.map((model) => (
                 <ModelCard key={model.id} model={model} selected={compare.includes(model.id)} onToggleCompare={onToggleCompare} />
               ))}

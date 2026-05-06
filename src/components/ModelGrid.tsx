@@ -31,7 +31,7 @@ const ModelGrid: FC<ModelGridProps> = ({ models, state, onToggleCompare }) => {
           没有匹配车型
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3 max-md:grid-cols-1">
+        <div className="grid grid-cols-3 gap-3 max-lg:grid-cols-2 max-md:grid-cols-1">
           {visible.map((model) => (
             <ModelCard
               key={model.id}

@@ -17,9 +17,8 @@ export const ModelsClient: FC<{ models: Model[] }> = ({ models }) => {
         <h1 className="text-[28px] font-bold m-0">车型库</h1>
       </div>
       <Filters state={state} onChange={patchState} />
-      <div className="grid grid-cols-[1fr_356px] gap-4 mt-4 max-lg:grid-cols-1">
+      <div className="mt-4">
         <ModelGrid models={models} state={state} onToggleCompare={toggleCompare} />
-        <aside className="grid content-start gap-4" />
       </div>
     </>
   );
