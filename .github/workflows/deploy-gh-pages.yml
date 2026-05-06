@@ -1,9 +1,11 @@
-name: Deploy to GitHub Pages
+# GitHub Pages（官方 Actions 发布）
+# Settings → Pages → Source 选「GitHub Actions」。
+
+name: Deploy GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -13,7 +15,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -23,20 +25,21 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: "22"
           cache: npm
-          cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
+      - name: Install
         run: npm ci
 
-      - name: Build
+      - name: Build static site
         run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Verify artifact root
+        run: ls -la out && test -f out/index.html && test -d out/_next
+
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: out
 
   deploy:
     needs: build
@@ -45,6 +48,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
