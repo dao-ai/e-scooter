@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "电摩情报站",
   description: "电动摩托车信息聚合看板",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
