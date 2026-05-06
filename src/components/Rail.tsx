@@ -18,7 +18,14 @@ const Rail: FC = () => {
   return (
     <aside className="sticky top-0 h-screen w-58 bg-gray-900 text-gray-100 p-4 flex flex-col shrink-0">
       <Link href="/overview" className="flex items-center gap-2.5 mb-7 font-extrabold text-white no-underline">
-        <span className="grid place-items-center w-9 h-9 rounded-lg bg-blue-500 text-white text-sm font-bold">V</span>
+        <span className="grid place-items-center w-9 h-9 rounded-lg bg-blue-500">
+          <svg viewBox="0 0 64 64" className="w-5 h-5 fill-white">
+            <ellipse cx="18" cy="40" rx="8" ry="8" />
+            <ellipse cx="46" cy="40" rx="8" ry="8" />
+            <path d="M24 20h10l7 16H28l-4-9-5 9H14l10-16z" />
+            <rect x="28" y="28" width="2" height="8" rx="1" opacity="0.5" />
+          </svg>
+        </span>
         <span className="text-sm">电摩情报站</span>
       </Link>
       <nav className="flex flex-col gap-1.5">

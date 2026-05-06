@@ -14,6 +14,17 @@ const Overview: FC<OverviewProps> = ({ models }) => {
   return (
     <section className="grid grid-cols-[0.92fr_1.08fr] gap-5 mb-4 max-lg:grid-cols-1">
       <div className="p-[clamp(22px,4vw,38px)] border border-gray-200 rounded-lg bg-white shadow-sm min-h-[332px]">
+        <div className="flex items-center gap-3 mb-3">
+          <span className="grid place-items-center w-10 h-10 rounded-xl bg-blue-600">
+            <svg viewBox="0 0 64 64" className="w-6 h-6 fill-white">
+              <ellipse cx="18" cy="40" rx="8" ry="8" />
+              <ellipse cx="46" cy="40" rx="8" ry="8" />
+              <path d="M24 20h10l7 16H28l-4-9-5 9H14l10-16z" />
+              <rect x="28" y="28" width="2" height="8" rx="1" opacity="0.5" />
+            </svg>
+          </span>
+          <span className="text-blue-600 text-lg font-extrabold tracking-tight">电摩情报站</span>
+        </div>
         <span className="block text-teal-600 text-[11px] font-extrabold tracking-widest uppercase mb-1">
           Electric Moto Intelligence
         </span>
