@@ -47,19 +47,12 @@ const Overview: FC<OverviewProps> = ({ models }) => {
           ))}
         </div>
       </div>
-      <figure className="relative m-0 min-h-[332px] overflow-hidden rounded-lg bg-gray-300">
+      <figure className="relative m-0 min-h-[332px] overflow-hidden rounded-lg">
         <img
-          src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Can-Am_electric_motorcycle_EICMA_2024.jpg"
-          alt="展台上的 Can-Am 电动摩托车"
+          src="/hero.svg"
+          alt="电摩情报站"
           className="block w-full h-full min-h-[332px] object-cover"
         />
-        <figcaption className="absolute right-3 bottom-2.5 max-w-[calc(100%-24px)] px-2 py-1 rounded-md bg-black/70 text-gray-100 text-[11px]">
-          Photo:{" "}
-          <a href="https://commons.wikimedia.org/wiki/File:Can-Am_electric_motorcycle_EICMA_2024.jpg" className="text-white">
-            AVMOTO / Wikimedia Commons
-          </a>
-          , <a href="https://creativecommons.org/licenses/by-sa/4.0/" className="text-white">CC BY-SA 4.0</a>
-        </figcaption>
       </figure>
     </section>
   );
