@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="12" fill="#2563eb"/>
-  <g fill="#fff" transform="translate(8,14)">
-    <ellipse cx="10" cy="26" rx="9" ry="9" fill="#fff"/>
-    <ellipse cx="38" cy="26" rx="9" ry="9" fill="#fff"/>
-    <path d="M18 6h8l6 14H21l-3-7-4 7H8l10-14z" fill="#fff"/>
-    <path d="M32 20l-3-8 6 8h-3z" fill="#e0e7ff" opacity="0.6"/>
-    <rect x="20" y="14" width="2" height="8" rx="1" fill="#e0e7ff" opacity="0.6"/>
-  </g>
+  <!-- 两个车轮 -->
+  <circle cx="16" cy="44" r="9" fill="#fff"/>
+  <circle cx="48" cy="44" r="9" fill="#fff"/>
+  <!-- 车身 -->
+  <polygon points="22,18 36,18 46,38 24,38" fill="#fff"/>
+  <!-- 车把 -->
+  <rect x="20" y="16" width="24" height="4" rx="2" fill="#fff"/>
 </svg>
